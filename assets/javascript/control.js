@@ -11,7 +11,7 @@ $(document).on("click", ".btn-add", function (event) {
 
     // create and display the tag
     var newTag = $('<div>').addClass('tag');
-    newTag.html(`<span class="btn-close">x</span> ${content}`);
+    newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${content}</span>`);
 
     $('#display-tag').append(newTag);
 });
@@ -22,9 +22,9 @@ $(document).on("click", ".btn-close", function () {
 });
 
 
-$(document).on("click", ".tag", function () {
+$(document).on("click", ".tag-name", function () {
     var key = "JRvrNMtu2KeupmBlZMUIUYAwxz2ugM87";
-    var content = $(this).text().slice(2);
+    var content = $(this).text();
     var queryURL = `http://api.giphy.com/v1/gifs/search?q=${content}&api_key=${key}`
     $.ajax({
         url: queryURL,
