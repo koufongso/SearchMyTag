@@ -15,8 +15,22 @@
     float:right;
     box-sizing: border-box;
     width: 20%;
-    padding:20px;
-    
+    padding:20px; 
+}
+
+.btn-add{
+    background-color: aquamarine;
+    height: 30px;
+    width: 100px;
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.btn-add:hover{
+    cursor: pointer;
 }
 
 
