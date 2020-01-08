@@ -33,10 +33,13 @@ $(document).on("click", ".tag-name", function () {
         console.log(response);
         var data = response.data;
         console.log(data);
-        for (var i = 0; i < data.length; i++) {
-            var newDiv = $('<div>').addClass("gif").html(`<img src=${data[i].images.fixed_height.url}>`);
-            $('#display-gif').prepend(newDiv);
+        if(data.length==0){
+            $('#display-gif').html(`<h1>Sorry, no result found...</h1>`);
+        }else{
+            for (var i = 0; i < data.length; i++) {
+                var newDiv = $('<div>').addClass("gif").html(`<span class="rating">Rating: ${data[i].rating.toUpperCase()}</span><br><img src=${data[i].images.fixed_height.url}>`);
+                $('#display-gif').prepend(newDiv);
+            }
         }
-
     });
 });

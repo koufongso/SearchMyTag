@@ -10,6 +10,12 @@
     width: 80%;
     padding:20px;
 }
+#display-tag{
+    border-bottom: 5px solid black;
+    padding:10px;
+}
+
+
 
 .side{
     float:right;
@@ -71,5 +77,5 @@
 /*------------gif------------*/
 .gif{
     display: inline-block;
-    margin:5px;
+    margin:10px;
 }
