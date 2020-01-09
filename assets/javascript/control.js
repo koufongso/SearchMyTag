@@ -1,5 +1,23 @@
-var tagList = []; // store all the tag
+/* load the tags stored in the local storage
+*/
+function loadTags() {
+    // load the tag from the tagList, if it not defined, initialize it and stroe it to the local storage
+    var tagList =  JSON.parse(localStorage.getItem("tagList"));
 
+    if (tagList == null) {
+        tagList = [];
+        localStorage.setItem("tagList", JSON.stringify(tagList));
+    } else {
+        for (var i = 0; i < tagList.length; i++) {
+            var newTag = $('<div>').addClass('tag');
+            newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${tagList[i]}</span>`);
+            $('#display-tag').append(newTag);
+        }
+    }
+}
+
+/* add new tag
+*/
 $(document).on("click", ".btn-add", function (event) {
     event.preventDefault();
     var content = $('#tag-content').val();
@@ -8,7 +26,11 @@ $(document).on("click", ".btn-add", function (event) {
 
     // only perfrom action if the input is not "empty"
     if (content != "") {
+        // update local storage
+        var tagList = JSON.parse(localStorage.getItem("tagList"));
         tagList.push(content);
+        localStorage.setItem("tagList", JSON.stringify(tagList));
+
         // create and display the tag
         var newTag = $('<div>').addClass('tag');
         newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${content}</span>`);
@@ -16,12 +38,21 @@ $(document).on("click", ".btn-add", function (event) {
     }
 });
 
+
+/* remove tag
+*/
 $(document).on("click", ".btn-close", function () {
+    // update local storage
+    var tagList = JSON.parse(localStorage.getItem("tagList"));
     tagList.splice(tagList.indexOf($(this).siblings().text()), 1); // remove the tag from the array
+    localStorage.setItem("tagList", JSON.stringify(tagList));
+
     $(this).parent('.tag').remove();
 });
 
 
+/* search tag content based on the search option
+*/
 $(document).on("click", ".tag-name", search);
 
 function search() {
@@ -50,6 +81,9 @@ function search() {
     }
 }
 
+
+/* use api to search relevant gif
+*/
 function searchGif(content) {
     var key = "JRvrNMtu2KeupmBlZMUIUYAwxz2ugM87";
     console.log(content);
@@ -63,7 +97,7 @@ function searchGif(content) {
 
         // console.log(data);
         if (data.length == 0) {
-            $('#display-result').html(`<h1>Sorry, result not found...</h1>`);
+            $('#display-result').html(`<h1>Sorry, gif not found...</h1>`);
         } else {
             $('#display-result').empty();
             for (var i = 0; i < data.length; i++) {
@@ -74,7 +108,8 @@ function searchGif(content) {
     });
 }
 
-
+/* use api to search movie
+*/
 function searchMovie(content) {
     var key = "d6386a38";
     var plot = "full";
@@ -83,9 +118,10 @@ function searchMovie(content) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        if (response.Response == "Flase") {
-            $('#display-result').html(`<h1>Sorry, result not found...</h1>`);
+        if (response.Response == "False") {
+            $('#display-result').html(`<h1>Sorry, movie not found...</h1>`);
         } else {
+            console.log(response);
             displayMovie(response);
         }
     });
@@ -117,3 +153,6 @@ function displayMovie(response) {
         </div>
     </div>`);
 }
+
+
+$(document).ready(loadTags);
