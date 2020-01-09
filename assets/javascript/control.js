@@ -94,23 +94,26 @@ function searchMovie(content) {
 function displayMovie(response) {
     $('#display-result').empty();
     // arrage the rating
-    var holder = $('<ul>');
+    var holder = $('<div>');
     var rating = response.Ratings; // rating is in an array
     for (var i = 0; i < rating.length; i++) {
-        holder.append(`<li>${rating[i].Source}:${rating[i].Value}</li>`);
+        holder.append(`<p>${rating[i].Source}: ${rating[i].Value}</p>`);
     }
 
     $('#display-result').html(`
-    <div class="movie-main">
-        <h1 class="movie-title">${response.Title} (${response.Year})</h1>
-        <h4 clas="movie-actor">Actors: ${response.Actors}</h4>
-        <p class="movie-plot">${response.Plot}</p>
-    </div>
-
-    <div class="movie-side">
-        <img class="movie-poster" src=${response.Poster}>
-        <ul class="movie-rating">
-            ${holder.html()}
-        </ul>
+    <div class="movie">
+        <div class="movie-main">
+            <h1 class="movie-title">${response.Title} (${response.Year})</h1>
+            <h5 class="movie-dircetor">Director: ${response.Director}</h5>
+            <h5 class="movie-writer">Writer: ${response.Writer}</h5>
+            <h5 clas="movie-actor">Actors: ${response.Actors}</h4>
+            <p class="movie-plot">${response.Plot}</p>
+        </div><!--
+        --><div class="movie-side">
+            <img class="movie-poster" src=${response.Poster}>
+            <div class="movie-rating">
+                ${holder.html()}
+            </div>
+        </div>
     </div>`);
 }

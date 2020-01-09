@@ -1,3 +1,7 @@
+body{
+    background-color: whitesmoke;
+}
+
 .container{
     clear: both;
     display: block;
@@ -81,4 +85,26 @@
 .gif{
     display: inline-block;
     margin:10px;
+}
+
+
+
+/*-------movie ------*/
+.movie{
+    width: 100%;
+    clear:both;
+}
+
+.movie-main{
+    box-sizing: border-box;
+    width:70%;
+    float: left;
+    padding:20px;
+}
+
+.movie-side{
+    box-sizing: border-box;
+    width:30%;
+    padding:20px 0 20px 20px;
+    float:right;
 }
