@@ -15,7 +15,10 @@
     padding:10px;
 }
 
-
+#search-option{
+    padding:5px;
+    margin:5px;
+}
 
 .side{
     float:right;
@@ -24,7 +27,7 @@
     padding:20px; 
 }
 
-.btn-add{
+.btn{
     background-color: aquamarine;
     height: 30px;
     width: 100px;
