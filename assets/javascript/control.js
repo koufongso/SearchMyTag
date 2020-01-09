@@ -1,4 +1,5 @@
-const GIF_DEFAULT_OFFSET = 25;
+const GIF_DEFAULT_OFFSET = 10;
+const GIF_DEFAULT_LIMIT = 10;
 
 
 /* load the tags stored in the local storage
@@ -89,11 +90,11 @@ function search() {
 */
 function searchGif(content, offSet) {
     if (offSet == 0) {
-        $('#display-result').empty();
+        $('#display-result').empty(); // first search, clear the previous result
     }
     var key = "JRvrNMtu2KeupmBlZMUIUYAwxz2ugM87";
     console.log(`content:${content}, offSet:${offSet}`);
-    var queryURL = `http://api.giphy.com/v1/gifs/search?q=${content}&offset=${offSet}&api_key=${key}`;
+    var queryURL = `http://api.giphy.com/v1/gifs/search?q=${content}&offset=${offSet}&limit=${GIF_DEFAULT_LIMIT}&api_key=${key}`;
 
     $.ajax({
         url: queryURL,
