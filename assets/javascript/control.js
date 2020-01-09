@@ -1,8 +1,11 @@
+const GIF_DEFAULT_OFFSET = 25;
+
+
 /* load the tags stored in the local storage
 */
 function loadTags() {
     // load the tag from the tagList, if it not defined, initialize it and stroe it to the local storage
-    var tagList =  JSON.parse(localStorage.getItem("tagList"));
+    var tagList = JSON.parse(localStorage.getItem("tagList"));
 
     if (tagList == null) {
         tagList = [];
@@ -70,7 +73,7 @@ function search() {
     switch (opt) {
         case "gif":
             console.log("call gif");
-            searchGif(content);
+            searchGif(content, 0);
             break;
         case "movie":
             console.log("call movie");
@@ -84,27 +87,37 @@ function search() {
 
 /* use api to search relevant gif
 */
-function searchGif(content) {
+function searchGif(content, offSet) {
+    if (offSet == 0) {
+        $('#display-result').empty();
+    }
     var key = "JRvrNMtu2KeupmBlZMUIUYAwxz2ugM87";
-    console.log(content);
-    var queryURL = `http://api.giphy.com/v1/gifs/search?q=${content}&api_key=${key}`;
+    console.log(`content:${content}, offSet:${offSet}`);
+    var queryURL = `http://api.giphy.com/v1/gifs/search?q=${content}&offset=${offSet}&api_key=${key}`;
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
         var data = response.data;
-
         // console.log(data);
         if (data.length == 0) {
-            $('#display-result').html(`<h1>Sorry, gif not found...</h1>`);
+            if (offSet == 0) {
+                $('#display-result').append(`<h1>Sorry, gif not found...</h1>`);
+            } else {
+                $('#display-result').append(`<h1>This is the last gif...</h1>`);
+            }
         } else {
-            $('#display-result').empty();
             for (var i = 0; i < data.length; i++) {
                 var newDiv = $('<div>').addClass("gif").html(`<span class="rating">Rating: ${data[i].rating.toUpperCase()}</span><br><img src=${data[i].images.fixed_height.url}>`);
-                $('#display-result').prepend(newDiv);
+                $('#display-result').append(newDiv);
             }
+
+            $('#display-more').html(`<span class="show-more">Show more result >>></span>`);
         }
+
+        offSet += GIF_DEFAULT_OFFSET;
+        $('.show-more').on("click", () => { searchGif(content, offSet) });
     });
 }
 

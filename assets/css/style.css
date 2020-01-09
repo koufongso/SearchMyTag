@@ -108,3 +108,15 @@ body{
     padding:20px 0 20px 20px;
     float:right;
 }
+
+.show-more{
+    display: block;
+    text-align: right;
+    opacity: 0.8;
+}
+
+.show-more:hover{
+    cursor: pointer;
+    opacity: 1;
+    font-weight: bold;
+}
