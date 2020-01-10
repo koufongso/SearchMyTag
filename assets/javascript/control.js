@@ -1,26 +1,23 @@
 const GIF_DEFAULT_OFFSET = 10;
 const GIF_DEFAULT_LIMIT = 10;
 
-
-/* load the tags stored in the local storage
+/* load the tag from the tagList, if it not defined, initialize it and stroe it to the local storage
 */
 function loadTags() {
-    // load the tag from the tagList, if it not defined, initialize it and stroe it to the local storage
     var tagList = JSON.parse(localStorage.getItem("tagList"));
-
     if (tagList == null) {
         tagList = [];
         localStorage.setItem("tagList", JSON.stringify(tagList));
     } else {
         for (var i = 0; i < tagList.length; i++) {
             var newTag = $('<div>').addClass('tag');
-            newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${tagList[i]}</span>`);
+            newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${tagList[i]}</span> <span class="icon-heart icon-heart-on" data-state="on">&#10084</span>`);
             $('#display-tag').append(newTag);
         }
     }
 }
 
-/* add new tag
+/* add new tag and display it
 */
 $(document).on("click", ".btn-add", function (event) {
     event.preventDefault();
@@ -31,28 +28,56 @@ $(document).on("click", ".btn-add", function (event) {
     // only perfrom action if the input is not "empty"
     if (content != "") {
         // update local storage
-        var tagList = JSON.parse(localStorage.getItem("tagList"));
-        tagList.push(content);
-        localStorage.setItem("tagList", JSON.stringify(tagList));
+        // var tagList = JSON.parse(localStorage.getItem("tagList"));
+        // tagList.push(content);
+        // localStorage.setItem("tagList", JSON.stringify(tagList));
 
         // create and display the tag
         var newTag = $('<div>').addClass('tag');
-        newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${content}</span>`);
+        newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${content}</span> <span class="icon-heart icon-heart-off" data-state="off">&#10084</span>`);
         $('#display-tag').append(newTag);
     }
 });
 
 
-/* remove tag
+/* remove tag from the panel
 */
 $(document).on("click", ".btn-close", function () {
     // update local storage
-    var tagList = JSON.parse(localStorage.getItem("tagList"));
-    tagList.splice(tagList.indexOf($(this).siblings().text()), 1); // remove the tag from the array
-    localStorage.setItem("tagList", JSON.stringify(tagList));
-
+    // var tagList = JSON.parse(localStorage.getItem("tagList"));
+    // tagList.splice(tagList.indexOf($(this).siblings().text()), 1); // remove the tag from the array
+    // localStorage.setItem("tagList", JSON.stringify(tagList));
     $(this).parent('.tag').remove();
 });
+
+
+/* added/removed the tag to/from the (favourite) tagList
+*/
+$(document).on("click", ".icon-heart", function () {
+
+    var tagList = JSON.parse(localStorage.getItem("tagList"));
+    var content = $(this).prev().text();
+    console.log(content);
+
+    if ($(this).attr("data-state") == "off") {
+        // added to favourite
+        $(this).attr("data-state", "on"); // changed state
+        $(this).removeClass("icon-heart-off");
+        $(this).addClass("icon-heart-on");
+
+        tagList.push(content); // add to favourite
+        localStorage.setItem("tagList", JSON.stringify(tagList)); // update local storage
+ 
+    }else if($(this).attr("data-state") == "on"){
+        // removed from favourite
+        $(this).attr("data-state", "off"); // changed state
+        $(this).removeClass("icon-heart-on");
+        $(this).addClass("icon-heart-off");
+
+        tagList.splice(tagList.indexOf(content), 1); // remove from favourite
+        localStorage.setItem("tagList", JSON.stringify(tagList)); // update local storage
+    }
+})
 
 
 /* search tag content based on the search option
@@ -93,7 +118,7 @@ function searchGif(content, offSet) {
         $('#display-result').empty(); // first search, clear the previous result
     }
     var key = "JRvrNMtu2KeupmBlZMUIUYAwxz2ugM87";
-    console.log(`content:${content}, offSet:${offSet}`);
+    // console.log(`content:${content}, offSet:${offSet}`);
     var queryURL = `http://api.giphy.com/v1/gifs/search?q=${content}&offset=${offSet}&limit=${GIF_DEFAULT_LIMIT}&api_key=${key}`;
 
     $.ajax({

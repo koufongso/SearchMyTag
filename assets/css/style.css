@@ -60,7 +60,7 @@ body{
 .tag-name{
     background-color: aquamarine;
     border-radius: 15px;
-    padding:5px 10px 5px 30px;
+    padding:5px 40px 5px 30px;
 }
 
 .tag-name:hover{
@@ -80,6 +80,29 @@ body{
     font-weight: bold;
     opacity: 1;
 }
+
+.icon-heart:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+
+.icon-heart-off{
+    position: absolute;
+    right: 10px;
+    font-size: 15px;
+    color: grey;
+    opacity: 0.5;
+}
+
+.icon-heart-on{
+    position: absolute;
+    right: 10px;
+    font-size: 15px;
+    color: gold;
+    opacity: 1;
+}
+
+
 
 /*------------gif------------*/
 .gif{
@@ -120,3 +143,5 @@ body{
     opacity: 1;
     font-weight: bold;
 }
+
+
