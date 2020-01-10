@@ -31,7 +31,7 @@ body{
     padding:20px; 
 }
 
-.btn{
+#add{
     background-color: aquamarine;
     height: 30px;
     width: 100px;
@@ -42,7 +42,7 @@ body{
 
 }
 
-.btn-add:hover{
+#add:hover{
     cursor: pointer;
 }
 
@@ -56,7 +56,6 @@ body{
 
 }
 
-
 .tag-name{
     background-color: aquamarine;
     border-radius: 15px;
@@ -67,7 +66,7 @@ body{
     cursor: pointer;
 }
 
-.btn-close{
+.close{
     position: absolute;
     left:10px;
     opacity: 0.5;
@@ -75,7 +74,7 @@ body{
     margin-right: 5px;
 }
 
-.btn-close:hover{
+.close:hover{
     cursor: pointer;
     font-weight: bold;
     opacity: 1;

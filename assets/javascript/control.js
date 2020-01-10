@@ -11,7 +11,7 @@ function loadTags() {
     } else {
         for (var i = 0; i < tagList.length; i++) {
             var newTag = $('<div>').addClass('tag');
-            newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${tagList[i]}</span> <span class="icon-heart icon-heart-on" data-state="on">&#10084</span>`);
+            newTag.html(`<span class="close">&#10005</span> <span class="tag-name">${tagList[i]}</span> <span class="icon-heart icon-heart-on" data-state="on">&#10084</span>`);
             $('#display-tag').append(newTag);
         }
     }
@@ -19,7 +19,7 @@ function loadTags() {
 
 /* add new tag and display it
 */
-$(document).on("click", ".btn-add", function (event) {
+$(document).on("click", "#add", function (event) {
     event.preventDefault();
     var content = $('#tag-content').val();
     console.log(content);
@@ -34,7 +34,7 @@ $(document).on("click", ".btn-add", function (event) {
 
         // create and display the tag
         var newTag = $('<div>').addClass('tag');
-        newTag.html(`<span class="btn-close">&#10005</span> <span class="tag-name">${content}</span> <span class="icon-heart icon-heart-off" data-state="off">&#10084</span>`);
+        newTag.html(`<span class="close">&#10005</span> <span class="tag-name">${content}</span> <span class="icon-heart icon-heart-off" data-state="off">&#10084</span>`);
         $('#display-tag').append(newTag);
     }
 });
@@ -42,7 +42,7 @@ $(document).on("click", ".btn-add", function (event) {
 
 /* remove tag from the panel
 */
-$(document).on("click", ".btn-close", function () {
+$(document).on("click", ".close", function () {
     // update local storage
     // var tagList = JSON.parse(localStorage.getItem("tagList"));
     // tagList.splice(tagList.indexOf($(this).siblings().text()), 1); // remove the tag from the array
