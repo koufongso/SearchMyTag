@@ -167,6 +167,7 @@ function searchMovie(content) {
 }
 
 function displayMovie(response) {
+    $('#display-more').empty();
     $('#display-result').empty();
     // arrage the rating
     var holder = $('<div>');
