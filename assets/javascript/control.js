@@ -28,10 +28,6 @@ $(document).on("click", "#add", function (event) {
     // only perfrom action if the input is not "empty"
     if (content != "") {
         // update local storage
-        // var tagList = JSON.parse(localStorage.getItem("tagList"));
-        // tagList.push(content);
-        // localStorage.setItem("tagList", JSON.stringify(tagList));
-
         // create and display the tag
         var newTag = $('<div>').addClass('tag');
         newTag.html(`<span class="close">&#10005</span> <span class="tag-name">${content}</span> <span class="icon-heart icon-heart-off" data-state="off">&#10084</span>`);
@@ -44,9 +40,6 @@ $(document).on("click", "#add", function (event) {
 */
 $(document).on("click", ".close", function () {
     // update local storage
-    // var tagList = JSON.parse(localStorage.getItem("tagList"));
-    // tagList.splice(tagList.indexOf($(this).siblings().text()), 1); // remove the tag from the array
-    // localStorage.setItem("tagList", JSON.stringify(tagList));
     $(this).parent('.tag').remove();
 });
 
@@ -129,9 +122,9 @@ function searchGif(content, offSet) {
         // console.log(data);
         if (data.length == 0) {
             if (offSet == 0) {
-                $('#display-result').append(`<h1>Sorry, gif not found...</h1>`);
+                $('#display-result').append(`<h1>Sorry, gif not found...</h1>`); // first search, no result
             } else {
-                $('#display-result').append(`<h1>This is the last gif...</h1>`);
+                $('#display-result').append(`<h1>This is the last gif...</h1>`); // show more result, no more result
             }
         } else {
             for (var i = 0; i < data.length; i++) {
