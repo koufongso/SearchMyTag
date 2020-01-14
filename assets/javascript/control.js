@@ -112,7 +112,7 @@ function searchGif(content, offSet) {
     }
     var key = "JRvrNMtu2KeupmBlZMUIUYAwxz2ugM87";
     // console.log(`content:${content}, offSet:${offSet}`);
-    var queryURL = `http://api.giphy.com/v1/gifs/search?q=${content}&offset=${offSet}&limit=${GIF_DEFAULT_LIMIT}&api_key=${key}`;
+    var queryURL = `https://api.giphy.com/v1/gifs/search?q=${content}&offset=${offSet}&limit=${GIF_DEFAULT_LIMIT}&api_key=${key}`;
 
     $.ajax({
         url: queryURL,
