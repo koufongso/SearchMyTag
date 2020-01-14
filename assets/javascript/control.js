@@ -145,7 +145,7 @@ function searchGif(content, offSet) {
 function searchMovie(content) {
     var key = "d6386a38";
     var plot = "full";
-    var queryURL = `http://www.omdbapi.com/?t=${content}&plot=${plot}&apikey=${key}`;
+    var queryURL = `https://www.omdbapi.com/?t=${content}&plot=${plot}&apikey=${key}`;
     $.ajax({
         url: queryURL,
         method: "GET"
